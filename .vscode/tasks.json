@@ -1,0 +1,67 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "swift: Build Debug",
+      "type" : "shell",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "command": "swift build",
+      "presentation": {
+        "focus": true,
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "swift: Build Release",
+      "type" : "shell",
+      "command": "swift build -c release",
+      "presentation": {
+        "focus": true,
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "swift: Execute",
+      "type" : "shell",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "command": "swift run",
+      "presentation": {
+        "focus": true,
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "swift: Package Update",
+      "type" : "shell",
+      "command": "swift package update",
+      "presentation": {
+        "focus": true,
+      },
+      "problemMatcher": [],
+    },
+    {
+      "label": "swift: Clean Build",
+      "type" : "shell",
+      "command": "rm",
+      "args": [
+        "-rf",
+        ".build/debug",
+        ".build/release",
+        ".build/x86_64-apple-macosx/debug",
+        ".build/x86_64-apple-macosx/release",
+      ],
+      "presentation": {
+        "focus": true,
+      },
+      "problemMatcher": [],
+    },
+  ]
+}
