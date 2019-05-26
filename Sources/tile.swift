@@ -46,6 +46,7 @@ public struct Tile {
         setColor(fore: colors.text, back: colors.background)
       }
     }
+
     writeAt(row+height/2, col+width/2, txt)
     setDefault(style: true)
   }

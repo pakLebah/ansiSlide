@@ -27,13 +27,15 @@ public struct Stats {
     let min  = (lapse / 60) % 60
     let hour = lapse / 3600
     var time  = " time ".white.onDarkGray+RPT.darkGray.onDefault
+
     if hour > 0 { time += " \(hour)h \(min)m \(sec)s " }
       else if min > 0 { time += " \(min)m \(sec)s " }
         else { time += " \(sec)s " }
 
-    writeAt(top+1, left+width+space, step+" \(steps) ")
-    writeAt(top+3, left+width+space, time)
-    writeAt(top+5, left+width+space, key+" \(lastKey)   ")
+    let tail = "         "  // clear previous text remnants
+    writeAt(top+1, left+width+space, step+" \(steps)"+tail)
+    writeAt(top+3, left+width+space, time+tail)
+    writeAt(top+5, left+width+space, key+" \(lastKey)"+tail)
   }
 
   public func writeStatus(_ text: String) {

@@ -4,15 +4,12 @@ let board = Board(size: 4, top: 3, left: 1)
 var stats = Stats(top: board.top, left: board.left, width: board.width, height: board.height)
 
 // shortcut to write text at given position
-@inlinable public func writeAt(_ row: Int, _ col: Int, _ text: String ) {
+@inlinable public func writeAt(_ row: Int, _ col: Int, _ text: String) {
   moveTo(row, col)
   write(text)
 }
 
-private func appTitle() {
-  clearScreen()
-  cursorOff()
-
+private func title() {
   let title = " TERMINAL SLIDER ".asWhite.backColor(88)
   write("▐".foreColor(88).onDefault+title+"▌".foreColor(88).onDefault)
 }
@@ -57,12 +54,11 @@ private func playAgain() -> Bool {
         write("N", suspend: 500)
         return false
       } else if char == ESC {
-        if readKey().code == .none { return false }
-          // reject key sequence
-          else {
-            wrongAnswer()
-            askAgain()
-          }
+        // reject key sequence
+        if readKey().code != .none {
+          wrongAnswer()
+          askAgain()
+        } else { return false }
       } else {
         wrongAnswer()
         askAgain()
@@ -76,10 +72,7 @@ private func done() -> Bool {
 
   if board.isFinished() {
     stats.writeStatus("Well done!".asLightGreen)
-
     moveLineDown(3)
-    moveToColumn(1)
-    clearToEndOfLine()
 
     if !playAgain() {
       moveToColumn(1)
@@ -99,16 +92,18 @@ private func done() -> Bool {
   }
 }
 
-/***** MAIN PROGRAM *****/
+/**********–––––––––– MAIN PROGRAM ––––––––––**********/
 
-appTitle()
+clearScreen()
+cursorOff()
+title()
 
-private var again = true
-while again {
+while true {
   shuffleBoard()
 
-  var quit = false
   while true {
+    var quit = false
+
     if keyPressed() {
       stats.steps += 1
       let code = readCode()
@@ -132,7 +127,7 @@ while again {
         }
       }
 
-      stats.writeStatus("Press "+"ESC".asRed+" to quit.")
+      stats.writeStatus("Press "+"ESC".asLightRed+" to quit.")
       if !quit { quit = board.isFinished() }
     }
     else {
@@ -140,7 +135,7 @@ while again {
     }
     if quit { break }
   }
-  again = !done()
+  if done() { break }
 }
 
 cursorOn()
