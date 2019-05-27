@@ -3,6 +3,11 @@ import ANSITerminal
 let board = Board(size: 4, top: 3, left: 1)
 var stats = Stats(top: board.top, left: board.left, width: board.width, height: board.height)
 
+// not operator as function to be more readable
+@inlinable public func not(_ value: Bool) -> Bool {
+  return !value
+}
+
 // shortcut to write text at given position
 @inlinable public func writeAt(_ row: Int, _ col: Int, _ text: String) {
   moveTo(row, col)
@@ -74,7 +79,7 @@ private func done() -> Bool {
     stats.writeStatus("Well done!".asLightGreen)
     moveLineDown(3)
 
-    if !playAgain() {
+    if not(playAgain()) {
       moveToColumn(1)
       clearToEndOfLine()
       writeln(thanks)
@@ -128,7 +133,7 @@ while true {
       }
 
       stats.writeStatus("Press "+"ESC".asLightRed+" to quit.")
-      if !quit { quit = board.isFinished() }
+      if not(quit) { quit = board.isFinished() }
     }
     else {
       stats.printStats()

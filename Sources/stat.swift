@@ -19,14 +19,14 @@ public struct Stats {
 
   public mutating func printStats() {
     let step = " steps ".white.onDarkGray+RPT.darkGray.onDefault
+    var time = " time ".white.onDarkGray+RPT.darkGray.onDefault
     let key  = " key ".white.onDarkGray+RPT.darkGray.onDefault
 
-    lapse = Int(Date().timeIntervalSince(start))
     // calculate time lapse
+    lapse = Int(Date().timeIntervalSince(start))
     let sec  = lapse % 60
     let min  = (lapse / 60) % 60
     let hour = lapse / 3600
-    var time  = " time ".white.onDarkGray+RPT.darkGray.onDefault
 
     if hour > 0 { time += " \(hour)h \(min)m \(sec)s " }
       else if min > 0 { time += " \(min)m \(sec)s " }
