@@ -1,7 +1,7 @@
 import ANSITerminal
 
 let board = Board(size: 4, top: 3, left: 1)
-var stats = Stats(top: board.top, left: board.left, width: board.width, height: board.height)
+var stats = Stats(board.top, board.left, board.width, board.height)
 
 // not operator as function to be more readable
 @inlinable public func not(_ value: Bool) -> Bool {
@@ -50,15 +50,17 @@ private func playAgain() -> Bool {
   askAgain()
   while true {
     if keyPressed() {
-      let char = readChar().lowercased()
+      let char = readChar()
 
-      if char == "y" {
+      if char.lowercased() == "y" {
         write("Y", suspend: 500)
         return true
-      } else if char == "n" {
+      } else if char.lowercased() == "n" {
         write("N", suspend: 500)
         return false
-      } else if char == ESC {
+      } else if char == NonPrintableChar.enter.char() {
+        return true
+      } else if char == NonPrintableChar.escape.char() {
         // reject key sequence
         if readKey().code != .none {
           wrongAnswer()

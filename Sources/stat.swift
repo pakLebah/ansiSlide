@@ -50,7 +50,7 @@ public struct Stats {
     lastKey = .none
   }
 
-  init(top: Int, left: Int, width: Int, height: Int) {
+  init(_ top: Int, _ left: Int, _ width: Int, _ height: Int) {
     self.top = top
     self.left = left
     self.width = width

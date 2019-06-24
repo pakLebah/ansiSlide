@@ -76,7 +76,7 @@ public struct Tiles {
   }
 
   public func isFinished() -> Bool {
-    // hard coded solution for 3x3 and 4x4 board
+    // hard coded solution for 3x3 and 4x4 and 5x5 boards
     let correct3x3 = [["A","B","C"],["D","E","F"],["G","H"," "]]
     let correct4x4 = [["A","B","C","D"],["E","F","G","H"],
                       ["I","J","K","L"],["M","N","O"," "]]

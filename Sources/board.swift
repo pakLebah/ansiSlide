@@ -2,7 +2,6 @@ import ANSITerminal
 
 let TILE_WIDTH  = 6
 let TILE_HEIGHT = 3
-let SHUFFLE_FACTOR = 15
 
 public class Board {
   var height: Int
@@ -91,13 +90,13 @@ public class Board {
   }
 
   public func shuffle(count: Int = 0) {
-    let count = count == 0 ? size*TILE_WIDTH*TILE_HEIGHT*SHUFFLE_FACTOR : count
+    let count = count == 0 ? size * width * height : count
 
     draw()
     for c in 1...count {
       tiles.shuffleEmpty()
-      if c % (SHUFFLE_FACTOR * size) == 0 { draw(false) } // boost drawing speed
-      delay(10)
+      if c % 100 == 0 { draw(false) }  // boost drawing speed
+      delay(5)
     }
     draw()
     setDefault()
